@@ -6,7 +6,6 @@ import java.util.Optional;
 import br.edu.fema.api_crud_livros.dto.CreateLivroDto;
 import br.edu.fema.api_crud_livros.dto.UpdateLivroDto;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.action.internal.EntityActionVetoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
