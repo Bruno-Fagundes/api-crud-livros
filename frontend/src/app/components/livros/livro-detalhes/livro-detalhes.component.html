@@ -1,0 +1,52 @@
+<div class="detalhes-container">
+  <h2>Detalhes do Livro</h2>
+
+  <div *ngIf="carregando" class="loading">Carregando detalhes...</div>
+
+  <div *ngIf="erro" class="error-message">
+    {{ erro }}
+  </div>
+
+  <!-- Adicione um alias para o livro -->
+  <div *ngIf="livro as activeLivro; else semLivro" class="livro-card">
+    <div class="livro-header">
+      <h3>{{ activeLivro.titulo }}</h3>
+      <span class="status-badge" [class.status-inactive]="!activeLivro.ativo">
+        {{ activeLivro.ativo ? "Ativo" : "Inativo" }}
+      </span>
+    </div>
+
+    <div class="livro-info">
+      <div class="info-row">
+        <strong>Autor:</strong> <span>{{ activeLivro.autor }}</span>
+      </div>
+      <div class="info-row">
+        <strong>Ano de Publicação:</strong>
+        <span>{{ activeLivro.anoPublicacao }}</span>
+      </div>
+    </div>
+
+    <div class="livro-descricao">
+      <strong>Sinopse:</strong>
+      <p>{{ activeLivro.sinopse }}</p>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-secondary" (click)="voltarParaLista()">Voltar</button>
+      <button class="btn-warning" (click)="editarLivro()">Editar</button>
+      <button
+        class="btn-danger"
+        *ngIf="activeLivro.ativo"
+        (click)="desativarLivro()"
+      >
+        Desativar
+      </button>
+    </div>
+  </div>
+
+  <ng-template #semLivro>
+    <div *ngIf="!carregando && !erro" class="no-data">
+      Nenhum livro encontrado
+    </div>
+  </ng-template>
+</div>

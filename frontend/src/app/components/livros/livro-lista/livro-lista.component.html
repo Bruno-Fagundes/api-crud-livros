@@ -1,0 +1,54 @@
+<div class="livros-container">
+  <h2>Livros Cadastrados</h2>
+
+  <div class="actions">
+    <a routerLink="/livros/cadastro" class="btn-primary"
+      >Adicionar Novo Livro</a
+    >
+  </div>
+
+  <div *ngIf="carregando" class="loading">Carregando livros...</div>
+
+  <div *ngIf="erro" class="error-message">
+    {{ erro }}
+  </div>
+
+  <div *ngIf="!carregando && !erro && livros.length === 0" class="no-records">
+    Nenhum livro encontrado.
+  </div>
+
+  <table *ngIf="livros.length > 0" class="livros-table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Ano</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let livro of livros" [class.inactive]="livro.ativo === false">
+        <td>{{ livro.titulo }}</td>
+        <td>{{ livro.autor }}</td>
+        <td>{{ livro.anoPublicacao }}</td>
+        <td>{{ livro.ativo ? "Ativo" : "Inativo" }}</td>
+        <td class="actions">
+          <button class="btn-info" (click)="verDetalhes(livro.id || 0)">
+            Detalhes
+          </button>
+          <button class="btn-warning" (click)="editarLivro(livro.id || 0)">
+            Editar
+          </button>
+          <button
+            class="btn-danger"
+            *ngIf="livro.ativo"
+            (click)="deletarLivro(livro.id || 0)"
+          >
+            Desativar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
