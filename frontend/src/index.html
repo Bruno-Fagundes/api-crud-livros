@@ -5,44 +5,31 @@
     <title>Sistema de Gerenciamento de Livros</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <!-- Estilos para o projeto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
       rel="stylesheet"
     />
     <style>
-      /* Estilos básicos para reset e configuração geral */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
       body {
+        margin: 0;
         font-family: "Roboto", sans-serif;
-        background-color: #f5f5f5;
-        color: #333;
-        line-height: 1.6;
+        background-color: #f8f9fa;
       }
 
-      /* Estilos globais que serão aplicados em toda a aplicação */
-      .container {
-        width: 100%;
+      .global-container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 20px;
       }
-
-      /* Ajustes para responsividade */
-      @media (max-width: 768px) {
-        .container {
-          padding: 10px;
-        }
-      }
     </style>
   </head>
   <body>
-    <app-root></app-root>
+    <div class="global-container">
+      <app-root></app-root>
+    </div>
+    <script src="polyfills.js" type="module"></script>
+    <script src="main.js" type="module"></script>
   </body>
 </html>

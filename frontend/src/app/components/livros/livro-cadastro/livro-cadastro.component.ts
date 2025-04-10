@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Livro } from '../../../models/livro.model';
+import { Livro } from '../../../entities/livro.entity';
 import { LivroService } from '../../../services/livro.service';
 
 @Component({
@@ -57,9 +57,12 @@ export class LivroCadastroComponent implements OnInit {
     }
 
     carregarLivro(id: number): void {
-        this.livroService.getLivroPorId(id).subscribe({
+        this.livroService.getLivroId(id).subscribe({
             next: (livro) => {
-                this.livroCadastro.patchValue(livro); // Alterado para livroCadastro
+                this.livroCadastro.patchValue({
+                    ...livro,
+                    anoPublicacao: livro.anoPublicacao?.toString() // Se necessário
+                });
             },
             error: (e) => {
                 this.erro = 'Erro ao carregar livro: ' + e.message;

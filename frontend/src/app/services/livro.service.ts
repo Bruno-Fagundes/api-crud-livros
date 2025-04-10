@@ -1,33 +1,34 @@
+// src/app/services/livro.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Livro } from '../models/livro.model';
+import { Livro } from '../entities/livro.entity';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' // ← Isso é crucial!
 })
 export class LivroService {
-  private apiUrl = 'http://localhost:8080/api/livros'; // Ajuste para a URL correta do seu backend
+  private apiUrl = 'http://localhost:8080/livros';
 
   constructor(private http: HttpClient) { }
 
-  getLivros(): Observable<Livro[]> {
+  listLivros(): Observable<Livro[]> {
     return this.http.get<Livro[]>(this.apiUrl);
   }
 
-  getLivroPorId(id: number): Observable<Livro> {
+  getLivroId(id: number): Observable<Livro> {
     return this.http.get<Livro>(`${this.apiUrl}/${id}`);
   }
 
-  criarLivro(livro: Livro): Observable<Livro> {
+  desativarLivro(id: number): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/${id}/desativar`, {});
+  }
+
+  criarLivro(livro: Omit<Livro, 'id'>): Observable<Livro> {
     return this.http.post<Livro>(this.apiUrl, livro);
   }
 
-  atualizarLivro(id: number, livro: Livro): Observable<Livro> {
+  atualizarLivro(id: number, livro: Partial<Livro>): Observable<Livro> {
     return this.http.put<Livro>(`${this.apiUrl}/${id}`, livro);
-  }
-
-  desativarLivro(id: number): Observable<any> {
-    return this.http.patch<Livro>(`${this.apiUrl}/${id}/desativar`, {});
   }
 }
