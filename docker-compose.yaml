@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: postgres-container
+    environment:
+      POSTGRES_DB: Faculdade
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Senha123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - livro-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres-db
+    ports:
+      - "8080:8080"
+    networks:
+      - livro-network
+
+volumes:
+  postgres-data:
+
+networks:
+  livro-network:
+    driver: bridge
