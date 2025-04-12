@@ -39,7 +39,6 @@ function LivroList() {
       try {
         setLoading(true);
         const data = await api.getAllLivros();
-        // Filtra apenas livros ativos no frontend
         const livrosAtivos = data.filter(livro => livro.ativo === true);
         setLivros(livrosAtivos);
         setError(null);
@@ -65,8 +64,7 @@ function LivroList() {
 
   const handleDelete = async () => {
     try {
-      await api.deleteLivro(selectedBookId); // Requisição DELETE para o backend
-      // Atualiza a lista filtrando livros ativos novamente
+      await api.deleteLivro(selectedBookId); 
       const updatedData = await api.getAllLivros();
       const livrosAtivos = updatedData.filter(livro => livro.ativo === true);
       setLivros(livrosAtivos);
