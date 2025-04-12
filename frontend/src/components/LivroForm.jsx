@@ -4,7 +4,7 @@ import api from '../services/api';
 
 const LivroForm = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Captura o ID da URL se existir
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     titulo: '',
     autor: '',
@@ -14,7 +14,6 @@ const LivroForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Busca os dados do livro se for edição
   useEffect(() => {
     if (id) {
       const fetchLivro = async () => {
@@ -59,10 +58,8 @@ const LivroForm = () => {
       setLoading(true);
       
       if (id) {
-        // Modo edição: PUT
         await api.updateLivro(id, formData);
       } else {
-        // Modo criação: POST
         await api.createLivro(formData);
       }
       
