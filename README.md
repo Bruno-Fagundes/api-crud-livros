@@ -27,12 +27,15 @@ API para gerenciamento de livros com operações CRUD, desenvolvida com Java Spr
 Execute os comandos abaixo no terminal, certifique se de seguir nesta ordem
 
 ```bash
-docker-compose up -d
+docker compose up -d
 
 mvn spring-boot:run
 
 cd frontend
-npm start 
+npm start
+
+Caso de errado a inicialização do Frontend, execute este comando e tente de novo:
+npm install
 ```
 
 ## 🛠 Tecnologias Utilizadas
